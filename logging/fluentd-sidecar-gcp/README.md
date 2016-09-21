@@ -13,6 +13,7 @@ In order to make this work, you have to add a few things to your pod config:
 2. A volume for the two containers to share. The emptyDir volume type is a good choice for this because we only want the volume to exist for the lifetime of the pod.
 3. Mount paths for the volume in each container.  In your primary container, this should be the path that the applications log files are written to. In the secondary container, this can be just about anything, so we put it under /mnt/log to keep it out of the way of the rest of the filesystem.
 4. The `FILES_TO_COLLECT` environment variable in the sidecar container, telling it which files to collect logs from. These paths should always be in the mounted volume.
+5. The `FORMAT` environment variable can optionally be added to specify the formatting that log files collected by the sidecar container will be using. This will allow google cloud logging to correctly identify severity 
 
 To try it out, make sure that your cluster was set up to log to Google Cloud Logging when it was created (i.e. you set `LOGGING_DESTINATION=gcp` or are running on Container Engine), then simply run
 ```console

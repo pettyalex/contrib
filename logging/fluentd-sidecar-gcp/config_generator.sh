@@ -19,6 +19,12 @@ if [ -z "$FILES_TO_COLLECT" ]; then
   exit 0
 fi
 
+if [ -z "$FORMAT" ]; then
+  format="none"
+else
+  format="$FORMAT"
+fi
+
 for filepath in $FILES_TO_COLLECT
 do
   filename=$(basename $filepath)
